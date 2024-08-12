@@ -12,8 +12,8 @@ class AIA_Admin
 
     static function admin_enqueue_scripts_call()
     {
-        wp_enqueue_style('aia-custom-styles', FV_THEME_URL . '/dest/css/admin-styles.css');
-        wp_enqueue_script('aia-custom-scripts', FV_THEME_URL . '/dest/js/admin-scripts.js');
+        wp_enqueue_style('aia-custom-styles', AIA_PLUGIN_URL . '/dest/css/admin-styles.css');
+        wp_enqueue_script('aia-custom-scripts', AIA_PLUGIN_URL . '/dest/js/admin-scripts.js');
 
         wp_localize_script('aia-custom-scripts', 'aiajax', [
             'ajaxurl' => admin_url('admin-ajax.php'),

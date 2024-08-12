@@ -5,28 +5,28 @@
     <div class="aia__container">
         <div class="aia_form__fields">
             <div class="aia_form__fow">
-                <label for="aia-title">
+                <label for="aia-topic">
                     <?php _e('Topic', AIA_DOMAIN); ?>
                 </label>
-                <input id="aia-title" name="aia-title" placeholder="<?php _e('Put a Topic', AIA_DOMAIN); ?>">
+                <input type="text" id="aia-topic" name="aia-topic" placeholder="<?php _e('Put a Topic', AIA_DOMAIN); ?>">
             </div>
             <div class="aia_form__fow">
                 <label for="aia-keywords">
                     <?php _e('Keywords', AIA_DOMAIN); ?>
                 </label>
-                <input id="aia-keywords" name="aia-keywords" placeholder="<?php _e('Put Keywords', AIA_DOMAIN); ?>">
+                <input type="text" id="aia-keywords" name="aia-keywords" placeholder="<?php _e('Put Keywords', AIA_DOMAIN); ?>">
             </div>
             <div class="aia_form__fow">
                 <label for="aia-tone-voice">
                     <?php _e('Tone of Voice', AIA_DOMAIN); ?>
                 </label>
-                <input id="aia-tone-voice" name="aia-tone-voice" placeholder="<?php _e('Put Tone of Voice', AIA_DOMAIN); ?>">
+                <input type="text" id="aia-tone-voice" name="aia-tone-voice" placeholder="<?php _e('Put Tone of Voice', AIA_DOMAIN); ?>">
             </div>
             <div class="aia_form__fow">
-                <label for="aia-language">
+                <label for="aia-point-of-view">
                     <?php _e('Point of View', AIA_DOMAIN); ?>
                 </label>
-                <select name="aia-language" id="aia-language">
+                <select name="aia-point-of-view" id="aia-point-of-view">
                     <option value="">
                         <?php _e('Select Language', AIA_DOMAIN); ?>
                     </option>

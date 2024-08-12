@@ -1,0 +1,75 @@
+.aia__container {
+    display: flex;
+    gap: 20px;
+}
+
+.aia_form__fields {
+    max-width: 50%;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    input[type='text'], select {
+        height: 41px;
+        padding: 0 15px;
+        color: $color-font;
+        border: 1px solid $color-font;
+        border-radius: $border-radius;
+        font-size: 18px;
+        transition: $transition;
+        box-shadow: none !important;
+        outline: none !important;
+        width: 100%;
+
+        &:active, &:focus {
+            border-color: $color-main;
+            box-shadow: 0 0 1px $color-main !important;
+        }
+    }
+}
+
+.aia_form__submit {
+    height: 48px;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    font-size: 18px;
+    outline: none;
+    transition: $transition;
+    background: $color-main;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    &.disabled, &[disabled] {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    &:active, &:focus {
+        outline: none;
+        background: $color-main-hover;
+    }
+
+    &:hover {
+        outline: none;
+        background: $color-main-hover;
+    }
+}
+
+.aia_form__fow {
+    &:not(:last-child) {
+        margin-bottom: 12px;
+    }
+
+    &:last-child {
+        margin-top: 30px;
+    }
+}

@@ -76,20 +76,7 @@ class AIA_Admin
 
     static function admin_init_call()
     {
-        $apiKeysFields = AIA_Contents::settings_api_keys_data();
-
-        /*$fields = array_merge($apiKeysFields);*/
-        $fields = $apiKeysFields;
-
-        if (empty($fields)) {
-            return;
-        }
-
-        $settings = array_keys($fields);
-
-        foreach ($settings as $setting) {
-            register_setting(AIA_SETTINGS_FIELDS, $setting);
-        }
+        register_setting(AIA_SETTINGS_FIELDS, AIA_OPTIONS_KEY);
     }
 
     static function options_page()

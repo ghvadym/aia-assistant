@@ -18,6 +18,7 @@ if (!defined('ABSPATH')) {
 const AIA_DOMAIN = 'aia';
 const AIA_SETTING_PAGE = AIA_DOMAIN.'-assistant';
 const AIA_SETTINGS_FIELDS = AIA_DOMAIN.'_general_settings';
+const AIA_OPTIONS_KEY = AIA_DOMAIN.'_settings';
 
 define('AIA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('AIA_PLUGIN_URL', plugin_dir_url(__FILE__));

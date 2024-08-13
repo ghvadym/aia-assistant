@@ -1,5 +1,5 @@
 <?php
-
+$settings = get_option(AIA_OPTIONS_KEY);
 $fieldsOptionKey = '';
 $fields = AIA_Contents::settings_api_keys_data();
 
@@ -20,9 +20,9 @@ if (empty($fields)) {
             <td>
                 <input type="text"
                        class="regular-text"
-                       name="<?php echo esc_attr($id); ?>"
+                       name="<?php echo sprintf('%1$s[%2$s]', AIA_OPTIONS_KEY, esc_attr($id)) ?>"
                        id="<?php echo esc_attr($id); ?>"
-                       value="<?php echo esc_attr(get_option($id)); ?>">
+                       value="<?php echo esc_attr($settings[$id] ?? ''); ?>">
             </td>
         </tr>
     <?php } ?>

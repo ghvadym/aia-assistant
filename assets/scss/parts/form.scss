@@ -3,6 +3,25 @@
     gap: 20px;
 }
 
+.aia_form__fields, .aia__content {
+    max-width: 50%;
+    width: 100%;
+}
+
+.aia__response {
+    font-size: 18px;
+    padding: 20px 0;
+
+    &:empty {
+        padding: 0;
+    }
+}
+
+.aia__error {
+    font-size: 18px;
+    color: $color-danger;
+}
+
 .aia_form__fields {
     max-width: 50%;
 
@@ -13,7 +32,7 @@
         font-weight: 500;
     }
 
-    input[type='text'], select {
+    input[type='text'], input[type='number'], select {
         height: 41px;
         padding: 0 15px;
         color: $color-font;
@@ -28,6 +47,11 @@
         &:active, &:focus {
             border-color: $color-main;
             box-shadow: 0 0 1px $color-main !important;
+        }
+
+        &.not_valid {
+            border-color: $color-danger;
+            box-shadow: 0 0 1px $color-danger !important;
         }
     }
 }

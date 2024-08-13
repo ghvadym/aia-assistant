@@ -17,10 +17,41 @@ class AIA_Ajax
     static function ai_prompt()
     {
         if (empty($_POST)) {
-            wp_send_json_error('There is no post data.');
+            wp_send_json([
+                'error'   => true,
+                'message' => __('There is no necessary data. Contact with developer.', AIA_DOMAIN)
+            ]);
+
             return;
         }
 
         $data = sanitize_post($_POST);
+
+        $question = $data['topic'] ?? '';
+
+        if (!$question) {
+            wp_send_json([
+                'error'   => true,
+                'message' => __('Topic is a necessary field.', AIA_DOMAIN)
+            ]);
+
+            return;
+        }
+
+        $answer = AIA_API::ai_assistant_request($data);
+
+        if (!$answer) {
+            wp_send_json([
+                'error'   => true,
+                'message' => __('There is no answer.', AIA_DOMAIN)
+            ]);
+
+            return;
+        }
+
+        wp_send_json([
+            'success' => true,
+            'answer'  => $answer
+        ]);
     }
 }

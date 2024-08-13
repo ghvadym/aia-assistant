@@ -66,3 +66,4 @@ cgi-bin
 webstat/*
 _files
 /vendor/
+/lib/

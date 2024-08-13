@@ -30,7 +30,7 @@ class AIA_Admin
             'aia-fields',
             __('AI Assistant', AIA_DOMAIN),
             [self::class, 'metabox_call'],
-            'post',
+            ['post', 'page'],
             'advanced',
             'high'
         );

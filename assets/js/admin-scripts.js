@@ -9,6 +9,7 @@
                 const btn = $(this);
                 const wrap = $(btn).closest('.aia');
                 const responseField = $(wrap).find('.aia__response');
+                const responseContent = $(wrap).find('.aia__content');
                 const errorMessage = $(wrap).find('.aia__error');
 
                 if (!formValidation(wrap)) {
@@ -37,6 +38,8 @@
                         if (response.success) {
                             if (response.answer) {
                                 $(responseField).html(response.answer);
+                                $(responseContent).addClass('active');
+                                $(responseContent).removeClass('issue');
                                 $(errorMessage).empty();
                             }
                         }
@@ -45,6 +48,8 @@
                             if (response.message) {
                                 $(responseField).empty();
                                 $(errorMessage).html(response.message);
+                                $(responseContent).removeClass('active');
+                                $(responseContent).addClass('issue');
                             }
                         }
 
@@ -100,6 +105,52 @@
             $([document.documentElement, document.body]).animate({
                 scrollTop: $(selector).offset().top
             }, 500);
+        }
+
+        const clearBtn = $('.aia__action_clear');
+        if (clearBtn.length) {
+            $(document).on('click', '.aia__action_clear', function () {
+                const wrap = $(this).closest('.aia__content');
+                $(wrap).find('.aia__response').empty();
+                $(wrap).find('.aia__error').empty();
+            });
+        }
+
+        const copyBtn = $('.aia__action_copy');
+        if (copyBtn.length) {
+            $(document).on('click', '.aia__action_copy', function () {
+                const response = $(this).closest('.aia__content').find('.aia__response');
+
+                if (!response || !$(response).html()) {
+                    return false;
+                }
+
+                copyToClipboard($(response).html());
+
+                $(copyBtn).addClass('active');
+                $(copyBtn).append('<span>Copied!</span>');
+
+                setTimeout(function () {
+                    $(copyBtn).removeClass('active');
+                }, 1500 );
+
+                setTimeout(function () {
+                    $(copyBtn).find('span').remove();
+                }, 2000 );
+            });
+        }
+
+        function copyToClipboard(text)
+        {
+            if (!text) {
+                return;
+            }
+
+            let temp = $('<input>');
+            $('body').append(temp);
+            temp.val(text).select();
+            document.execCommand('copy');
+            temp.remove();
         }
     });
 })(jQuery);

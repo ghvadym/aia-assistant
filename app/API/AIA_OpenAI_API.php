@@ -10,7 +10,7 @@ class AIA_OpenAI_API
             return null;
         }
 
-        $apiKey = get_field('openai_api_key', 'options');
+        $apiKey = AIA_Helper::get_field('openai_api_key');
 
         if (empty($apiKey)) {
             return null;
@@ -47,7 +47,7 @@ class AIA_OpenAI_API
             return null;
         }
 
-        $apiKey = get_field('openai_api_key', 'options');
+        $apiKey = AIA_Helper::get_field('openai_api_key');
 
         if (empty($apiKey)) {
             return null;

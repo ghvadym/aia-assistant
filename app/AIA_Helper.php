@@ -56,4 +56,15 @@ class AIA_Helper
             'zh' => 'Chinese'
         ];
     }
+
+    static function get_field(string $key = '')
+    {
+        if (!$key) {
+            return null;
+        }
+
+        $settings = get_option(AIA_OPTIONS_KEY);
+
+        return $settings[$key] ?? null;
+    }
 }

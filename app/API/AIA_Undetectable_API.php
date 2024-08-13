@@ -10,7 +10,7 @@ class AIA_Undetectable_API
             return null;
         }
 
-        $apiKey = get_field('undetectableai_api_key', 'options');
+        $apiKey = AIA_Helper::get_field('undetectableai_api_key');
 
         if (empty($apiKey)) {
             return null;

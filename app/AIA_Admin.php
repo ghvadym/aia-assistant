@@ -13,7 +13,7 @@ class AIA_Admin
         add_filter('plugin_action_links', [self::class, 'add_plugin_link'], 10, 2);
 
         /* Metabox for taxonomies */
-        self::register_meta_boxes_tor_taxonomies();
+        self::register_meta_boxes_for_taxonomies();
     }
 
     static function admin_enqueue_scripts_call()
@@ -41,7 +41,15 @@ class AIA_Admin
 
     static function metabox_call()
     {
-        include AIA_Helper::get_path('parts/aia-process');
+        $settings = get_option(AIA_OPTIONS_KEY);
+        $openAiApiKey = $settings['openai_api_key'] ?? '';
+        $undetectableApiKey = $settings['undetectableai_api_key'] ?? '';
+
+        if ($openAiApiKey && $undetectableApiKey) {
+            include AIA_Helper::get_path('parts/aia-process');
+        } else {
+            include AIA_Helper::get_path('parts/aia-process-error');
+        }
     }
 
     /**
@@ -92,7 +100,7 @@ class AIA_Admin
         include AIA_Helper::get_path('parts/aia-options');
     }
 
-    static function register_meta_boxes_tor_taxonomies()
+    static function register_meta_boxes_for_taxonomies()
     {
         $taxonomies = AIA_Helper::taxonomies();
 
@@ -101,10 +109,6 @@ class AIA_Admin
         }
 
         foreach ($taxonomies as $taxonomy) {
-            add_action($taxonomy.'_add_form_fields', function () {
-                include AIA_Helper::get_path('parts/aia-process');
-            });
-
             add_action($taxonomy.'_edit_form_fields', function () {
                 include AIA_Helper::get_path('parts/aia-process');
             });

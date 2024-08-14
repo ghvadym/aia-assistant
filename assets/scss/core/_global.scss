@@ -1,9 +1,9 @@
-._ai_spinner {
+.aia_spinner {
     pointer-events: none;
     position: relative;
 }
 
-._ai_spinner:before {
+.aia_spinner:before {
     content: '';
     position: absolute;
     left: 0;
@@ -15,7 +15,7 @@
     min-height: 500px;
 }
 
-._ai_spinner:after {
+.aia_spinner:after {
     content: '';
     position: absolute;
     left: 50%;

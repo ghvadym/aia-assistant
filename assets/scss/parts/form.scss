@@ -115,6 +115,7 @@
         box-shadow: none !important;
         outline: none !important;
         width: 100%;
+        max-width: 100%;
 
         &:active, &:focus {
             border-color: $color-main;

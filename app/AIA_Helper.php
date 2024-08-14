@@ -3,6 +3,11 @@
 
 class AIA_Helper
 {
+    /**
+     * Return the path to file into the plugin
+     * @param string $fileName
+     * @return string
+     */
     static function get_path(string $fileName): string
     {
         if (!$fileName) {
@@ -18,6 +23,10 @@ class AIA_Helper
         return $pathToFile;
     }
 
+    /**
+     * Return the array of conditions for the select field Point Of View
+     * @return array
+     */
     static function point_of_view_list(): array
     {
         return [
@@ -27,6 +36,10 @@ class AIA_Helper
         ];
     }
 
+    /**
+     * Return the list of languages for the select field Languages
+     * @return string[]
+     */
     static function languages_list(): array
     {
         return [
@@ -57,6 +70,11 @@ class AIA_Helper
         ];
     }
 
+    /**
+     * Return field from options table by key
+     * @param string $key
+     * @return mixed|null
+     */
     static function get_field(string $key = '')
     {
         if (!$key) {
@@ -80,12 +98,12 @@ class AIA_Helper
         $block_editor = false;
 
         if (has_filter('replace_editor', 'gutenberg_init')) {
-            /*Gutenberg is installed and activated.*/
+            /* Gutenberg is installed and activated */
             $gutenberg = true;
         }
 
         if (version_compare($GLOBALS['wp_version'], '5.0-beta', '>')) {
-            /*Block editor.*/
+            /* Block editor */
             $block_editor = true;
         }
 
@@ -100,5 +118,48 @@ class AIA_Helper
         }
 
         return get_option('classic-editor-replace') === 'block';
+    }
+
+    /**
+     * Return the list of all custom post types names
+     * @return array
+     */
+    static function post_types(): array
+    {
+        $defaultPostTypes = ['post', 'page'];
+
+        $customPostTypes = get_post_types([
+            'public'   => true,
+            '_builtin' => false
+        ]);
+
+        $postTypes = array_merge($defaultPostTypes, $customPostTypes);
+
+        return array_values($postTypes);
+    }
+
+    /**
+     * Return the list of taxonomies names
+     * @return array
+     */
+    static function taxonomies(): array
+    {
+        $taxonomies = [];
+        $exclude = [
+            'post_format'
+        ];
+
+        foreach (self::post_types() as $postType) {
+            $taxonomies = array_merge($taxonomies, get_object_taxonomies($postType));
+        }
+
+        /* Remove system taxonomies from the list */
+        foreach ($taxonomies as $taxonomy) {
+            if (in_array($taxonomy, $exclude)) {
+                unset($taxonomies[array_search($taxonomy, $taxonomies)]);
+            }
+        }
+
+        return $taxonomies;
     }
 }

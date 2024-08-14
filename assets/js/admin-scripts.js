@@ -32,7 +32,7 @@
                         point_of_view: $(wrap).find('#aia-point-of-view option:selected').val(),
                     },
                     beforeSend : function () {
-                        $(wrap).addClass('_spinner');
+                        $(wrap).addClass('aia_spinner');
                     },
                     success    : function (response) {
                         if (response.success) {
@@ -53,7 +53,7 @@
                             }
                         }
 
-                        $(wrap).removeClass('_spinner');
+                        $(wrap).removeClass('aia_spinner');
                     },
                     error      : function (err) {
                         console.log('error', err);

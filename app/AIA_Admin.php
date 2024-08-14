@@ -11,6 +11,9 @@ class AIA_Admin
         add_action('add_meta_boxes', [self::class, 'register_meta_boxes']);
         add_action('edit_form_after_title', [self::class, 'edit_form_after_title_call']);
         add_filter('plugin_action_links', [self::class, 'add_plugin_link'], 10, 2);
+
+        /* Metabox for taxonomies */
+        self::register_meta_boxes_tor_taxonomies();
     }
 
     static function admin_enqueue_scripts_call()
@@ -30,7 +33,7 @@ class AIA_Admin
             'aia-fields',
             __('AI Assistant', AIA_DOMAIN),
             [self::class, 'metabox_call'],
-            ['post', 'page'],
+            AIA_Helper::post_types(),
             'advanced',
             'high'
         );
@@ -87,5 +90,24 @@ class AIA_Admin
     static function options_page()
     {
         include AIA_Helper::get_path('parts/aia-options');
+    }
+
+    static function register_meta_boxes_tor_taxonomies()
+    {
+        $taxonomies = AIA_Helper::taxonomies();
+
+        if (empty($taxonomies)) {
+            return;
+        }
+
+        foreach ($taxonomies as $taxonomy) {
+            add_action($taxonomy.'_add_form_fields', function () {
+                include AIA_Helper::get_path('parts/aia-process');
+            });
+
+            add_action($taxonomy.'_edit_form_fields', function () {
+                include AIA_Helper::get_path('parts/aia-process');
+            });
+        }
     }
 }

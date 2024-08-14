@@ -1,7 +1,3 @@
-<?php
-$post = get_post();
-?>
-
 <div class="aia">
     <div class="aia__container">
         <div class="aia_form__fields">
@@ -64,7 +60,7 @@ $post = get_post();
                 <input type="number" id="aia-words-count" name="aia-words-count" min="1" placeholder="<?php _e('Put max amount of Words', AIA_DOMAIN); ?>">
             </div>
             <div class="aia_form__fow">
-                <div class="aia_form__submit" data-id="<?php echo $post->ID; ?>" data-type="<?php echo $post->post_type; ?>">
+                <div class="aia_form__submit">
                     <?php _e('Get Response', AIA_DOMAIN); ?>
                 </div>
             </div>

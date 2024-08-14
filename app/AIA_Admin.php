@@ -41,11 +41,16 @@ class AIA_Admin
         include AIA_Helper::get_path('parts/aia-process');
     }
 
+    /**
+     * Move metabox under title if Gutenberg is not enabled
+     */
     static function edit_form_after_title_call()
     {
-        global $post, $wp_meta_boxes;
-        do_meta_boxes(get_current_screen(), 'advanced', $post);
-        unset($wp_meta_boxes[get_post_type($post)]['advanced']);
+        if (!AIA_Helper::is_gutenberg_active()) {
+            global $post, $wp_meta_boxes;
+            do_meta_boxes(get_current_screen(), 'advanced', $post);
+            unset($wp_meta_boxes[get_post_type($post)]['advanced']);
+        }
     }
 
     static function add_plugin_link($plugin_actions, $plugin_file)

@@ -67,4 +67,38 @@ class AIA_Helper
 
         return $settings[$key] ?? null;
     }
+
+    /**
+     * Check if Gutenberg is active.
+     * Must be used not earlier than plugins_loaded action fired.
+     *
+     * @return bool
+     */
+    static function is_gutenberg_active(): bool
+    {
+        $gutenberg = false;
+        $block_editor = false;
+
+        if (has_filter('replace_editor', 'gutenberg_init')) {
+            /*Gutenberg is installed and activated.*/
+            $gutenberg = true;
+        }
+
+        if (version_compare($GLOBALS['wp_version'], '5.0-beta', '>')) {
+            /*Block editor.*/
+            $block_editor = true;
+        }
+
+        if (!$gutenberg && !$block_editor) {
+            return false;
+        }
+
+        include_once ABSPATH . 'wp-admin/includes/plugin.php';
+
+        if (!is_plugin_active('classic-editor/classic-editor.php')) {
+            return true;
+        }
+
+        return get_option('classic-editor-replace') === 'block';
+    }
 }
